@@ -29,6 +29,16 @@ async function run() {
       const books = await cursor.toArray();
       res.send(books);
     });
+
+    //GET API BY SINGLE ID
+    app.get("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const books = await bookCollection.findOne(query);
+      res.send(books);
+    });
+
+    
   } finally {
     // await client.close();
   }
